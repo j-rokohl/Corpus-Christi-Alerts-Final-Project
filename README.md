@@ -51,7 +51,7 @@ The Manifest file provides the basic blueprint that allows the app to be install
 - **lang:** Used to specify the language of the content
 - **icons:** Used to specify one or more image files that define the icons to represent your web application
 
-##  The 'Notes' Page, Firebase, IndexedDB
+##  The 'Notes' Page, Firebase, & IndexedDB
 
 The Notes page requires that users sign up. Once signed up, users can save notes. This app stores notes in a Firestore Database when online. When offline, the app stores notes in the local IndexedDB. Users can easily copy data throughout the site using the 📄 copy buttons. This information can then be pasted into the Notes page for future reference. The Notes page allows for CRUD: Create, Read, Update and Destroy. 
 
