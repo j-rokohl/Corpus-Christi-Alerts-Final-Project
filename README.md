@@ -2,7 +2,7 @@
 
 This is a Progressive Web App that pulls data from the the National Weather Service (NWS) and U.S. Geological Survey (USGS) to provide weather alerts and local lake levels for those living in the Coastal Bend. Lake levels for Corpus Christi Lake and Choke Canyon are shown for the day before.
 
- ![desktop and mobile prototypes](https://alerts-cc.netlify.app/img/responsive-design.png) 
+ ![desktop and mobile prototypes](https://alerts-cc.netlify.app/img/responsive-design-v2.png) 
 
 ## App Features
 
