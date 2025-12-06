@@ -51,9 +51,9 @@ The Manifest file provides the basic blueprint that allows the app to be install
 - **lang:** Used to specify the language of the content
 - **icons:** Used to specify one or more image files that define the icons to represent your web application
 
-##  Firebase & IndexedDB
+##  The 'Notes' Page, Firebase, IndexedDB
 
-The Notes page allows users to store notes. This app stores notes in a Firestore Database when online. When offline, the app stores notes in the local IndexedDB. Users can easily copy data throughout the site using the 📄 copy buttons. This information can then be pasted into the Notes page for future reference. The Notes page allows for CRUD: Create, Read, Update and Destroy. 
+The Notes page requires that users sign up. Once signed up, users can save notes. This app stores notes in a Firestore Database when online. When offline, the app stores notes in the local IndexedDB. Users can easily copy data throughout the site using the 📄 copy buttons. This information can then be pasted into the Notes page for future reference. The Notes page allows for CRUD: Create, Read, Update and Destroy. 
 
 To utilize CRUD functions on the Notes page:
 - CREATE notes by clicking the red "Add a Note" button
@@ -66,22 +66,22 @@ To utilize CRUD features offline it is the same as online, with a few changes to
 - When the connection is restored and the data is synced, you will be notified with an additional modal titled "Connection Restored." This modal will appear on any page you visit. 
 
 ## How Offline & Online Data is Synced
-When the app cannot get a Firebase ID because it is offline, a temporary task ID is generated locally and stored in IndexedDB. A synced flag is set to false to show that the task hasn’t been uploaded to online yet. Once the internet connection is restored, the app runs the syncTasks function to upload any unsynced tasks to Firebase.
+When the app cannot get a Firebase ID because it is offline, a temporary note ID is generated locally and stored in IndexedDB. A synced flag is set to false to show that the note hasn’t been uploaded to online yet. Once the internet connection is restored, the app runs the syncNotes function to upload any unsynced notes to Firebase.
 
-### Steps for Syncing Tasks:
-1. A function first collects all tasks from IndexedDB where synced is false.
+### Steps for Syncing Notes:
+1. A function first collects all notes from IndexedDB where synced is false.
 
-2. For each of these tasks, the function:
+2. For each of these notes, the function:
 
-    - Creates a new task object (taskToSync) containing the needed data (title, description, and status) but excluding the temporary ID.
+    - Creates a new note object (noteToSync) containing the needed data (title, description, and status) but excluding the temporary ID.
 
     - Sends this object to Firebase, which then generates a unique ID for it and saves it.
 
-3. After the task is successfully saved to Firebase, the function:
+3. After the note is successfully saved to Firebase, the function:
 
     - Removes the old record with the temporary ID from IndexedDB.
 
-    - Inserts the updated task (with the new Firebase ID and synced set to true) back to IndexedDB.
+    - Inserts the updated note (with the new Firebase ID and synced set to true) back to IndexedDB.
 
 ##  Data Sources
 

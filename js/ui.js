@@ -15,10 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
     M.Sidenav.init(menus, { edge: "right" });
     const forms = document.querySelector(".side-form");
     M.Sidenav.init(forms, { edge: "left" });
-
-    // Load notes from IndexedDB and sync with Firebase
-    loadNotes();
-    syncNotes();
     checkStorageUsage();
     requestPersistentStorage();
 });
@@ -69,7 +65,7 @@ async function getDB() {
 }
 
 // Sync unsynced notes from IndexedDB to Firebase
-async function syncNotes() {
+export async function syncNotes() {
     const db = await getDB();
     const tx = db.transaction("notes", "readonly");
     const store = tx.objectStore("notes");
@@ -239,10 +235,10 @@ function displayNote(note) {
     // Create new note HTML and add it to the container
     const html = `
     <div class="card-panel white row valign-wrapper" data-id="${note.id}">
-      <div class="col s1">
-        <img src="/img/note.png" class="responsive-img" alt="Note icon" style="width: 100%; max-width: 80px; height: auto; margin: auto;"/>
+      <div class="col s2 m1">
+        <img src="/img/note.png" class="responsive-img" alt="Note icon" style="width: 100%; max-width: 80px; min-width: 28px; height: auto; margin: auto;"/>
       </div>
-      <div class="note-detail col s8">
+      <div class="note-detail col s10 m8">
         <h5 class="note-title black-text">${note.title}</h5>
         <div class="note-description black-text">${note.description}</div>
       </div>

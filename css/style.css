@@ -1,39 +1,87 @@
 h1 {
     font-size: 2.7em !important;
 }
+
 .white-outline {
-    border: 1px solid white; 
+    border: 1px solid white;
     border-radius: .5em;
 }
+
 .truncate-multi-line {
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 6; /* Limit to 3 lines */
+    -webkit-line-clamp: 6;
+    /* Limit to 3 lines */
     -webkit-box-orient: vertical;
 }
+
 .loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #ff3d00;
-  width: 80px;
-  height: 80px;
-  -webkit-animation: spin 1.2s linear infinite; /* Safari */
-  animation: spin 1.2s linear infinite;
-  margin: 120px auto;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #ff3d00;
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin 1.2s linear infinite;
+    /* Safari */
+    animation: spin 1.2s linear infinite;
+    margin: 120px auto;
 }
+
 .no-show {
-  display: none !important;
+    display: none !important;
 }
+
 .show {
-  display: block !important;
+    display: block !important;
 }
+
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid #FFF !important;
+    box-shadow: 0 1px 0 0 #FFF !important;
+}
+
+.input-field input[type=email]:focus {
+    border-bottom: 1px solid #FFF !important;
+    box-shadow: 0 1px 0 0 #FFF !important;
+}
+
+.input-field label {
+    color: #FFF;
+}
+
+.input-field input[type=email] {
+    color: #FFF;
+}
+
+.input-field input[type=password] {
+    color: #FFF;
+}
+
+.input-field input[type=password]:focus + label {
+    color: #FFF !important;
+}
+
+.input-field input[type=email]:focus + label {
+    color: #FFF !important;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

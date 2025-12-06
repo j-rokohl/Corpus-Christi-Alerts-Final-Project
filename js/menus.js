@@ -31,6 +31,12 @@
                     <li>
                         <a href="./contact.html" class="waves-effect grey-text text-darken-4">Contact</a>
                     </li>
+                    <li>
+                        <a href="./auth.html" id="login-btn" class="waves-effect deep-orange-text text-darken-4">Login</a>
+                    </li>
+                    <li>
+                        <a href="#" id="logout-btn" class="waves-effect deep-orange-text text-darken-4" style="display: none">Logout</a>
+                    </li>
                 </ul>
     `;
     document.getElementById("largeM").innerHTML = largeMenu;
@@ -58,6 +64,12 @@
             </li>
             <li>
                 <a href="./contact.html" class="waves-effect grey-text text-darken-4">Contact</a>
+            </li>
+            <li>
+                <a href="./auth.html" id="login-btn-mb" class="waves-effect deep-orange-text text-darken-4">Login</a>
+            </li>
+            <li>
+                <a href="#" id="logout-btn-mb" class="waves-effect deep-orange-text text-darken-4" style="display: none">Logout</a>
             </li>
         </ul>
     `;

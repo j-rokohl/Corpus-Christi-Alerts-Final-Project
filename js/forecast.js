@@ -34,7 +34,7 @@ fetch(apiUrl)
       let forecastBtn = 'btn-' + periods[i].number;
       let forecastId = periods[i].number;
       node.innerHTML =
-        '<div class="col s12 m3" style="min-height: 34rem !important;">' +
+        '<div class="col s12 m6 l3" style="min-height: 34rem !important;">' +
         '<div class="card" style="min-height: 34rem;">' +
         '<div class="card-image">' +
         '<img src="' + periods[i].icon + '"' + ' alt="' + periods[i].shortForecast + '" />' +

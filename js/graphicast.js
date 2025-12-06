@@ -95,7 +95,12 @@ fetch('https://www.weather.gov/source/crp/graphicast/graphicast.xml')
                         })
                 }
 
-                status(link);
+                try {
+                    status(link);
+                }
+                catch (e) {
+                    console.error("Broken: ", e);
+                }
 
                 //Add Object
                 const newObj = {

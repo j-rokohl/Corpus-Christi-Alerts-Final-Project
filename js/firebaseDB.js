@@ -1,33 +1,35 @@
-// Import the functions you need from the Firebase SDK
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { currentUser } from "./unprotectedPage.js";
+
+import { db } from "./firebaseConfig.js";
+
 import {
-    getFirestore,
     collection,
     addDoc,
+    setDoc,
     getDocs,
     deleteDoc,
     updateDoc,
     doc,
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyAvoPneCFuoRgG9mcsZ3OjdqDr-Iirb1TY",
-    authDomain: "alert-notes.firebaseapp.com",
-    projectId: "alert-notes",
-    storageBucket: "alert-notes.firebasestorage.app",
-    messagingSenderId: "224214997173",
-    appId: "1:224214997173:web:a949fd40197275e271c6fc"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
 // Add a note
 export async function addNoteToFirebase(note) {
     try {
-        const docRef = await addDoc(collection(db, "notes"), note);
+        if (!currentUser){
+            throw new Error("User is not authenticated.")
+        }
+        const userId = currentUser.uid;
+        console.log( "userID: ", userId );
+        const userRef = doc(db, "users", userId);
+        await setDoc(
+        userRef,
+        {
+            email: currentUser.email,
+        },
+        { merge: true }
+        );
+        const notesRef = collection(userRef, "notes");
+        const docRef = await addDoc(notesRef, note);
         return { id: docRef.id, ...note };
     } catch (e) {
         console.error("Error adding note: ", e);
@@ -37,7 +39,12 @@ export async function addNoteToFirebase(note) {
 export async function getNotesFromFirebase() {
     const notes = [];
     try {
-        const querySnapshot = await getDocs(collection(db, "notes"));
+        if (!currentUser){
+            throw new Error("User is not authenticated.")
+        }
+        const userId = currentUser.uid;
+        const noteRef = collection(doc(db, "users", userId), "notes");
+        const querySnapshot = await getDocs(noteRef);
         querySnapshot.forEach((doc) => {
             notes.push({ id: doc.id, ...doc.data() });
         });
@@ -49,7 +56,11 @@ export async function getNotesFromFirebase() {
 
 export async function deleteNoteFromFirebase(id) {
     try {
-        await deleteDoc(doc(db, "notes", id));
+        if (!currentUser){
+            throw new Error("User is not authenticated.")
+        }
+        const userId = currentUser.uid;
+        await deleteDoc(doc(db, "users", userId, "notes", id));
     } catch (e) {
         console.error("Error deleting note: ", e);
     }
@@ -58,8 +69,11 @@ export async function deleteNoteFromFirebase(id) {
 export async function updateNoteInFirebase(id, updatedData) {
     console.log(updatedData, id);
     try {
-        const noteRef = doc(db, "notes", id);
-        console.log(noteRef);
+        if (!currentUser){
+            throw new Error("User is not authenticated.")
+        }
+        const userId = currentUser.uid;
+        const noteRef = doc(db, "users", userId, "notes", id);
         await updateDoc(noteRef, updatedData);
     } catch (e) {
         console.error("Error updating note: ", e);
